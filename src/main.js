@@ -1,43 +1,58 @@
-import 'figlet';
 import chalk        from 'chalk';
 import CLI          from 'clui';
+import clc          from 'cli-color';
 import { Spinner }  from 'clui';
 import inquirer     from 'inquirer';
-import Preferences  from 'preferences';
-import _            from 'lodash';
+import {
+  reverse,
+  forEach,
+} from 'lodash';
 import fs           from 'fs';
 
-function getCredentials(callback) {
-  var questions = [
-    {
-      name: 'username',
-      type: 'input',
-      message: 'Enter username:',
-      validate: function( value ) {
-        if (value.length) {
-          return true;
-        } else {
-          return 'Please enter your username or e-mail address';
-        }
-      }
-    },
-    {
-      name: 'password',
-      type: 'password',
-      message: 'Enter your password:',
-      validate: function(value) {
-        if (value.length) {
-          return true;
-        } else {
-          return 'Please enter your password';
-        }
-      }
-    }
-  ];
+import { getVersions } from './gameSetup';
 
-  inquirer.prompt(questions).then(callback);
+// import { launcher } from './gameHandler';
+// launcher();
+
+function clear(clear){
+  if (clear !== false) process.stdout.write('\x1B[2J');
+  process.stdout.write('\x1B[0f');
 }
 
-getCredentials(function(){
-  console.log(arguments);
-});
+clear();
+
+let conf = {
+  MCVERSIONURL: 'http://s3.amazonaws.com/Minecraft.Download/versions/versions.json',
+  MCEULA: false,
+};
+
+forEach(process.env, (v, k) => { if (typeof conf[k] !== 'undefined'){
+  if(v === 'true' || v === 'TRUE' || v === '1') v = true;
+  if(v === 'false' || v === 'FALSE' || v === '0') v = false;
+
+  conf[k] = v;
+}});
+
+Object.assign(global, conf);
+
+
+(async function main(){
+
+
+  // const versions = await getVersions(MCVERSIONURL);
+
+  // const choices = versions.map( o => o.id);
+
+  // inquirer.prompt([
+  //   {
+  //     type: 'list',
+  //     name: 'version',
+  //     message: 'Which version ?',
+  //     choices
+  //   },
+  // ]).then(function (answers) {
+  //   console.log(JSON.stringify(answers, null, '  '));
+  // });
+})();
+
+

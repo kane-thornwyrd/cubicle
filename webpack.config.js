@@ -6,13 +6,17 @@ module.exports = {
   devtool: 'cheap-module-source-map',
   target: 'node',
   entry: {
-    app: [
+    cubicle: [
       'babel-polyfill',
       './src/main.js',
     ],
+    wrapper: [
+      'babel-polyfill',
+      './src/wrapper.js',
+    ]
   },
   output: {
-    filename: 'cubicle',
+    filename: '[name]',
     path: './bin'
   },
   plugins: [
@@ -21,10 +25,8 @@ module.exports = {
   ],
   module: {
     loaders: [
-      {
-        loader: "figlet",
-        test: /\.figletrc$/,
-      },
+      { test: /\.node$/, loader: "file-loader" },
+      { test: /\.json$/, loader: "json-loader" },
       {
         test: /(\.js)$/,
         exclude: path.resolve(__dirname, "node_modules"),
@@ -35,6 +37,9 @@ module.exports = {
             'transform-regenerator',
             'syntax-decorators',
             'transform-async-generator-functions',
+            'transform-class-properties',
+            'transform-export-extensions',
+            'transform-object-rest-spread',
           ],
         },
       },
