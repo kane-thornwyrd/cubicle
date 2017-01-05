@@ -3,11 +3,10 @@ import CLI          from 'clui';
 import clc          from 'cli-color';
 import { Spinner }  from 'clui';
 import inquirer     from 'inquirer';
-import {
-  reverse,
-  forEach,
-} from 'lodash';
 import fs           from 'fs';
+
+import conf from './configManager';
+Object.assign(global, conf);
 
 import { getVersions } from './gameSetup';
 
@@ -21,38 +20,26 @@ function clear(clear){
 
 clear();
 
-let conf = {
-  MCVERSIONURL: 'http://s3.amazonaws.com/Minecraft.Download/versions/versions.json',
-  MCEULA: false,
-};
 
-forEach(process.env, (v, k) => { if (typeof conf[k] !== 'undefined'){
-  if(v === 'true' || v === 'TRUE' || v === '1') v = true;
-  if(v === 'false' || v === 'FALSE' || v === '0') v = false;
-
-  conf[k] = v;
-}});
-
-Object.assign(global, conf);
 
 
 (async function main(){
 
 
-  // const versions = await getVersions(MCVERSIONURL);
+  const versions = await getVersions(MC_VERSION_URL);
 
-  // const choices = versions.map( o => o.id);
+  const choices = versions.map( o => o.id);
 
-  // inquirer.prompt([
-  //   {
-  //     type: 'list',
-  //     name: 'version',
-  //     message: 'Which version ?',
-  //     choices
-  //   },
-  // ]).then(function (answers) {
-  //   console.log(JSON.stringify(answers, null, '  '));
-  // });
+  inquirer.prompt([
+    {
+      type: 'list',
+      name: 'version',
+      message: 'Which version ?',
+      choices
+    },
+  ]).then(function (answers) {
+    console.log(JSON.stringify(answers, null, '  '));
+  });
 })();
 
 

@@ -13,7 +13,7 @@ module.exports = {
     wrapper: [
       'babel-polyfill',
       './src/wrapper.js',
-    ]
+    ],
   },
   output: {
     filename: '[name]',

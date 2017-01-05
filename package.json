@@ -8,9 +8,14 @@
     "build": "webpack --colors --progress",
     "build:watch": "webpack --colors --watch --progress"
   },
+  "bin": {
+    "cubicle": "./bin/cubicle"
+  },
   "keywords": [
     "CLI",
     "Minecraft",
+    "Minecraft Forge",
+    "Forge",
     "admin"
   ],
   "author": "Jean-cédric Thérond <jean.cedric.t@gmail.com>",
