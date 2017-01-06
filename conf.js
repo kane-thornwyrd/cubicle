@@ -29,7 +29,7 @@ module.exports = {
 	"MC_MODE": "survival",
 	"MC_MOTD": "Welcome to my server !",
 	"MC_PVP": true,
-	"MC_LEVEL_TYPE": "DExxxxxxxxxxFAULT",
+	"MC_LEVEL_TYPE": "DEFAULT",
 	"MC_GENERATOR_SETTINGS": "",
 	"MC_LEVEL": "world",
 	"MC_WORLD": false,

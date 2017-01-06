@@ -1,13 +1,17 @@
 require('file?name=../[name].[ext]!./conf.js');
 
-import { forEach } from 'lodash';
+import { forEach }  from 'lodash';
+import cliArgs      from 'commander';
+import inquirer     from 'inquirer';
 
+import { getVersions } from './gameSetup';
+
+import pkgjson from '../package.json';
 import confjson from '../conf.js';
-
 
 let conf = {
   MC_CONF_FILE: 'conf.json',
-  MC_VERSION_URL: 'http://s3.amazonaws.com/Minecraft.Download/versions/versions.json',
+  MC_VERSION_URL: 'https://launchermeta.mojang.com/mc/game/version_manifest.json',
   MC_FORGE_VERSION_URL: 'http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions_slim.json',
   MC_EULA: false,
   MC_PORT: 25565,
@@ -76,10 +80,47 @@ let conf = {
 Object.assign(conf, confjson);
 
 forEach(process.env, (v, k) => { if (typeof conf[k] !== 'undefined'){
-  if(v === 'true' || v === 'TRUE' || v === '1') v = true;
-  if(v === 'false' || v === 'FALSE' || v === '0') v = false;
+  if(!!v.match(/^true$/i)) v = true;
+  if(!!v.match(/^false$/i)) v = false;
 
   conf[k] = v;
 }});
+
+cliArgs.version(pkgjson.version);
+
+const runtimeArgs = [
+  {
+    s: 'm', f: 'mcVersion', d: 'Minecraft version',
+    solver: async function(){
+      const versions = await getVersions(conf.MC_VERSION_URL, 'minecraft');
+      return versions.map( o => o.id);
+    },
+  },
+  {
+    s: 'f', f: 'forgeVersion', d: 'Forge version',
+    solver: async function(){
+      const versions = await getVersions(conf.MC_FORGE_VERSION_URL, 'forge');
+      return versions.map( o => o.id);
+    },
+  },
+];
+
+runtimeArgs.map(a => { cliArgs.option(`-${a.s}, --${a.f}`, a.d) });
+
+conf.cliArgs = cliArgs.parse(process.argv);
+
+(async function(){
+  const versions = await getVersions(conf.MC_VERSION_URL, 'minecraft');
+  // inquirer.prompt([
+  //   {
+  //     type: 'list',
+  //     name: 'version',
+  //     message: 'Which version ?',
+  //     choices
+  //   },
+  // ]).then(function (answers) {
+  //   console.log(JSON.stringify(answers, null, '  '));
+  // });
+})()
 
 export default conf;
