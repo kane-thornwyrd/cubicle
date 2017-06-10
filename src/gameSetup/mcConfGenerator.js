@@ -1,5 +1,63 @@
-
-
-export default async function mcConfGenerator(){
-
-};
+export default ({ folder, mcVersion, forgeVersion }) => ({
+  folder,
+  mcVersion,
+  forgeVersion,
+  MC_VERSION_URL: 'http://s3.amazonaws.com/Minecraft.Download/versions/versions.json',
+  MC_FORGE_VERSION_URL: 'http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions_slim.json',
+  MC_EULA: false,
+  MC_PORT: 25565,
+  MC_DIFFICULTY: 2,
+  MC_WHITELIST: false,
+  MC_OPS: false,
+  MC_ICON: false,
+  MC_RCON: false,
+  MC_QUERY: true,
+  MC_MAX_PLAYERS: 12,
+  MC_MAX_WORLD_SIZE: false,
+  MC_ALLOW_NETHER: true,
+  MC_ANNOUNCE_PLAYER_ACHIEVEMENTS: true,
+  MC_ENABLE_COMMAND_BLOCK: true,
+  MC_FORCE_GAMEMODE: true,
+  MC_GENERATE_STRUCTURES: true,
+  MC_HARDCORE: false,
+  MC_MAX_BUILD_HEIGHT: 256,
+  MC_MAX_TICK_TIME: 60000,
+  MC_SPAWN_ANIMALS: true,
+  MC_SPAWN_MONSTERS: true,
+  MC_SPAWN_NPCS: true,
+  MC_VIEW_DISTANCE: 12,
+  MC_SEED: false,
+  MC_MODE: 'survival',
+  MC_MOTD: 'Welcome to my server !',
+  MC_PVP: true,
+  MC_LEVEL_TYPE: 'DEFAULT',
+  MC_GENERATOR_SETTINGS: '',
+  MC_LEVEL: 'world',
+  MC_WORLD: false,
+  MC_MODPACK: false,
+  MC_ONLINE_MODE: true,
+  MC_10GB_JVM_OPTS: '-Xmx10G -Xms10G -Xmn1280m -XX:+DisableExplicitGC' +
+    ' -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:+UseNUMA -XX:+CMSParallelRemarkEnabled' +
+    ' -XX:MaxTenuringThreshold=15 -XX:MaxGCPauseMillis=30 -XX:GCPauseIntervalMillis=150' +
+    ' -XX:+UseAdaptiveGCBoundary -XX:-UseGCOverheadLimit -XX:+UseBiasedLocking' +
+    ' -XX:SurvivorRatio=8 -XX:TargetSurvivorRatio=90 -XX:MaxTenuringThreshold=15' +
+    ' -Dfml.ignorePatchDiscrepancies=true -XX:+UseFastAccessorMethods -XX:+UseCompressedOops' +
+    ' -XX:+OptimizeStringConcat -XX:+AggressiveOpts -XX:ReservedCodeCacheSize=2048m' +
+    ' -XX:+UseCodeCacheFlushing -XX:SoftRefLRUPolicyMSPerMB=10000 -XX:ParallelGCThreads=10',
+  MC_3GB_JVM_OPTS: '-Xmx3G -Xms3G -Xmn768m -XX:+DisableExplicitGC -XX:+UseConcMarkSweepGC' +
+    ' -XX:+UseParNewGC -XX:+UseNUMA -XX:+CMSParallelRemarkEnabled -XX:MaxTenuringThreshold=15' +
+    ' -XX:MaxGCPauseMillis=30 -XX:GCPauseIntervalMillis=150 -XX:+UseAdaptiveGCBoundary' +
+    ' -XX:-UseGCOverheadLimit -XX:+UseBiasedLocking -XX:SurvivorRatio=8 -XX:TargetSurvivorRatio=90' +
+    ' -XX:MaxTenuringThreshold=15 -Dfml.ignorePatchDiscrepancies=true -XX:+UseFastAccessorMethods' +
+    ' -XX:+UseCompressedOops -XX:+OptimizeStringConcat -XX:+AggressiveOpts' +
+    ' -XX:ReservedCodeCacheSize=2048m -XX:+UseCodeCacheFlushing -XX:SoftRefLRUPolicyMSPerMB=10000' +
+    ' -XX:ParallelGCThreads=10',
+  MC_1GB_JVM_OPTS: '-Xmx1G -Xms1G -Xmn128m -XX:+DisableExplicitGC -XX:+UseConcMarkSweepGC' +
+    ' -XX:+UseParNewGC -XX:+UseNUMA -XX:+CMSParallelRemarkEnabled -XX:MaxTenuringThreshold=15' +
+    ' -XX:MaxGCPauseMillis=30 -XX:GCPauseIntervalMillis=150 -XX:+UseAdaptiveGCBoundary' +
+    ' -XX:-UseGCOverheadLimit -XX:+UseBiasedLocking -XX:SurvivorRatio=8 -XX:TargetSurvivorRatio=90' +
+    ' -XX:MaxTenuringThreshold=15 -Dfml.ignorePatchDiscrepancies=true -XX:+UseFastAccessorMethods' +
+    ' -XX:+UseCompressedOops -XX:+OptimizeStringConcat -XX:+AggressiveOpts' +
+    ' -XX:ReservedCodeCacheSize=2048m -XX:+UseCodeCacheFlushing -XX:SoftRefLRUPolicyMSPerMB=2000' +
+    ' -XX:ParallelGCThreads=10',
+});

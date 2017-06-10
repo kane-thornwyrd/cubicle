@@ -1,2 +1,7 @@
-export getVersions from './getVersions';
-export mcConfGenerator from './mcConfGenerator';
+import getVersions from './getVersions';
+import mcConfGenerator from './mcConfGenerator';
+
+export {
+  getVersions,
+  mcConfGenerator,
+};

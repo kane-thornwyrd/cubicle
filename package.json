@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "./bin/cubicle",
-    "build": "webpack --colors --progress",
-    "build:watch": "webpack --colors --watch --progress"
+    "build": "babel src --out-dir lib",
+    "build:watch": "chokidar 'src/**/*.js' -c 'npm run build'"
   },
   "bin": {
     "cubicle": "./bin/cubicle"
@@ -15,35 +15,33 @@
     "CLI",
     "Minecraft",
     "Minecraft Forge",
+    "Minecraft Admin",
     "Forge",
     "admin"
   ],
   "author": "Jean-cédric Thérond <jean.cedric.t@gmail.com>",
   "license": "GPL-3.0",
   "devDependencies": {
-    "babel": "^6.5.2",
-    "babel-core": "^6.21.0",
-    "babel-loader": "^6.2.10",
-    "babel-plugin-syntax-decorators": "^6.13.0",
-    "babel-plugin-transform-async-generator-functions": "^6.17.0",
-    "babel-plugin-transform-class-properties": "^6.19.0",
-    "babel-plugin-transform-export-extensions": "^6.8.0",
-    "babel-plugin-transform-object-rest-spread": "^6.20.2",
-    "babel-plugin-transform-runtime": "^6.15.0",
-    "babel-polyfill": "^6.20.0",
-    "babel-preset-latest": "^6.16.0",
-    "chalk": "^1.1.3",
-    "clui": "^0.3.1",
-    "commander": "^2.9.0",
-    "file-loader": "^0.9.0",
-    "inquirer": "^2.0.0",
-    "lodash": "^4.17.3",
-    "request": "^2.79.0",
-    "shelljs": "^0.7.5",
-    "try-thread-sleep": "^1.0.0",
-    "webpack": "^1.14.0"
+    "babel-cli": "*",
+    "babel-plugin-syntax-decorators": "*",
+    "babel-plugin-transform-async-generator-functions": "*",
+    "babel-plugin-transform-class-properties": "*",
+    "babel-plugin-transform-es2015-destructuring": "*",
+    "babel-plugin-transform-export-extensions": "*",
+    "babel-plugin-transform-object-rest-spread": "*",
+    "babel-plugin-transform-runtime": "*",
+    "babel-polyfill": "*",
+    "babel-preset-latest": "*",
+    "chokidar-cli": "*",
+    "eslint": "*",
+    "eslint-config-airbnb-base": "*",
+    "eslint-plugin-import": "*",
+    "eslint": "*"
   },
   "dependencies": {
-    "json-loader": "^0.5.4"
+    "lodash": "*",
+    "request": "*",
+    "vorpal": "*",
+    "vorpal-rc": "*"
   }
 }
