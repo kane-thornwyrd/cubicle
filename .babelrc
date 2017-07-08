@@ -1,12 +1,13 @@
 {
-  "presets": ["latest"],
+  "presets": [
+    ["env", "react"]
+  ],
   "plugins": [
-    "transform-regenerator",
-    "syntax-decorators",
-    "transform-es2015-destructuring",
-    "transform-async-generator-functions",
+    "transform-decorators",
     "transform-class-properties",
     "transform-export-extensions",
-    "transform-object-rest-spread"
+    "transform-object-rest-spread",
+    "transform-react-jsx",
+    "transform-react-jsx-source"
   ]
 }
