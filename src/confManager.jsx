@@ -2,16 +2,15 @@ import { pickBy, get, mapKeys } from 'lodash';
 
 import INI from 'ini';
 
-const MC_PROPS_REGEX = /^MC_(.+)$/;
-
-const globalConfToServerProperties = (v, k) => get(k.match(MC_PROPS_REGEX), '[1]', false);
-
 const defaultConf = {
+  EULA_eula: false,
   MCINTERNAL_version: '',
   FORGE_version: '',
-  JAR_folder: '',
   JAR_version_url: 'https://launchermeta.mojang.com/mc/game/version_manifest.json',
   JAR_forge_version_url: 'http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions_slim.json',
+  JAR_forge_dl_url: 'http://files.minecraftforge.net/maven/net/minecraftforge/forge/:mc_version:-:forge_version:/forge-:mc_version:-:forge_version:-installer.jar',
+  JAR_forge_jar_name: 'forge-:mc_version:-:forge_version:-installer.jar',
+  JAR_minecraft_jar_name: 'minecraft_server.:mc_version:.jar',
   'MC_max-tick-time': 60000,
   'MC_generator-settings': '',
   'MC_allow-nether': true,
@@ -77,9 +76,24 @@ const defaultConf = {
 
 export default conf => Object.assign({}, defaultConf, conf);
 
+const MC_PROPS_REGEX = /^MC_(.+)$/;
+const EULA_PROPS_REGEX = /^EULA_(.+)$/;
+const globalConfToServerProperties = (v, k) => get(k.match(MC_PROPS_REGEX), '[1]', false);
+const globalConfToEula = (v, k) => get(k.match(EULA_PROPS_REGEX), '[1]', false);
+
 export const serverProperties = conf => INI.stringify(
   mapKeys(
     pickBy(conf, globalConfToServerProperties),
     globalConfToServerProperties,
   ),
 );
+
+export const eulaFile = conf => INI.stringify(
+  mapKeys(
+    pickBy(conf, globalConfToEula),
+    globalConfToEula,
+  ),
+);
+
+
+export const cubicleConf = conf => JSON.stringify(conf, undefined, 2);

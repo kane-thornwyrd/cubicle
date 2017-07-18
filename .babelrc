@@ -1,6 +1,11 @@
 {
   "presets": [
-    ["env", "react"]
+    ["env", {
+      "targets": {
+        "node": ["8.1.2"]
+      }
+    }],
+    "react"
   ],
   "plugins": [
     "transform-decorators",

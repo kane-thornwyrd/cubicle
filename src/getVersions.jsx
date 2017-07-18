@@ -26,12 +26,14 @@ function minecraftParser(body) {
       id,
       type,
       releaseTime,
+      url,
     } = v;
     return {
       id,
       type,
       dep: '',
       releaseTime,
+      url,
     }
   }).sort((a, b) => {
     const dateA = new Date(a.releaseTime);

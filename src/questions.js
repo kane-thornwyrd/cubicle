@@ -1,4 +1,4 @@
-import getVersions from '../getVersions';
+import getVersions from './getVersions';
 import Separator from 'choices-separator';
 import { groupBy, forEach } from 'lodash';
 
@@ -9,7 +9,7 @@ export default async (conf) => {
 
   let pagecurrent = 1;
   const pager = () => {
-    return `${pagecurrent++}/40 `
+    return `${pagecurrent++}/41 `
   };
 
   let questions = [
@@ -243,6 +243,10 @@ export default async (conf) => {
     },
     {
       type: 'list', name: 'JVM_args', message: 'Which JVM Args template do you prefer ?', choices: JVM_PARAMETERS_TEMPLATES,
+      prefix: pager(),
+    },
+    {
+      type: 'confirm', name: 'EULA_eula', message: 'DO YOU ACCEPT THE MOJANG EULA ?', default: false,
       prefix: pager(),
     },
   ]);
